@@ -34,7 +34,7 @@ const ButtonsContainer = styled(Box)`
 
 const Header = () => {
   return (
-    <StyledHeader position="static">
+    <StyledHeader>
       <Toolbar style={{ minHeight: 55 }}>
         <StyledBox>
           <img

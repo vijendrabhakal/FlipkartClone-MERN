@@ -9,24 +9,29 @@ const SearchComponent = styled(Box)`
   margin-left: 10px;
   border-radius: 2px;
   display: flex;
+  font-size: 14px;
+  height: 36px;
 `;
+
 const StyledInputBase = styled(InputBase)`
-  padding-left: 15px;
+  padding: 0 16px;
   width: 100%;
 `;
-const StyledSearchIcon = styled(Box)`
+
+const SearchIconWrapper = styled(Box)`
   padding: 5px 10px;
   color: #2874f0;
+  display: flex;
 `;
 
 export default function Search() {
   return (
     <>
       <SearchComponent>
-        <StyledInputBase placeholder="Search for products,brands and more"></StyledInputBase>
-        <StyledSearchIcon>
+        <StyledInputBase placeholder="Search for products, brands, and more"></StyledInputBase>
+        <SearchIconWrapper>
           <SearchIcon />
-        </StyledSearchIcon>
+        </SearchIconWrapper>
       </SearchComponent>
     </>
   );
