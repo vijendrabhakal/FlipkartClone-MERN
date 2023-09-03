@@ -38,7 +38,7 @@ export default function Banner() {
         itemClass="carousel-item-padding-40-px"
       >
         {bannerData.map((element) => (
-          <Box>
+          <Box key={element.id}>
             <Img src={element.url} alt="img" />
           </Box>
         ))}

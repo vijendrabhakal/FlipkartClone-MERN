@@ -1,7 +1,10 @@
 import { Box, Button, Typography } from "@mui/material";
-import React from "react";
+import { useContext, useState } from "react";
 import styled from "@emotion/styled";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Login from "../login/Login";
+import { DataContext } from "../../context/AuthContext";
+import Profile from "./Profile";
 
 const Container = styled(Box)`
   display: flex;
@@ -34,19 +37,38 @@ const LoginBtn = styled(Button)`
 `;
 
 export default function CustomButtons() {
+  const [open, setOpen] = useState(false);
+
+  const { account, setAccount } = useContext(DataContext);
+
+  const LoginDialog = () => {
+    setOpen(true);
+  };
+
   return (
-    <Container>
-      <LoginBtn variant="contained">Login</LoginBtn>
-      <Typography style={{ width: "135px", marginTop: 3 }}>
-        Become a Seller
-      </Typography>
-      <Typography style={{ marginTop: 3 }}>More</Typography>
-      <Box style={{ display: "flex", marginTop: 3 }}>
-        <Typography>
-          <ShoppingCartIcon />
+    <>
+      <Container>
+        {account ? (
+          <Profile account={account} setAccount={setAccount} />
+        ) : (
+          <LoginBtn onClick={LoginDialog} variant="contained">
+            Login
+          </LoginBtn>
+        )}
+        <Typography style={{ width: "135px", marginTop: 3, cursor: "pointer" }}>
+          Become a Seller
         </Typography>
-        <Typography>Cart</Typography>
-      </Box>
-    </Container>
+        <Typography style={{ marginTop: 3, cursor: "pointer" }}>
+          More
+        </Typography>
+        <Box style={{ display: "flex", marginTop: 3 }}>
+          <Typography style={{ cursor: "pointer" }}>
+            <ShoppingCartIcon />
+          </Typography>
+          <Typography style={{ cursor: "pointer" }}>Cart</Typography>
+        </Box>
+      </Container>
+      <Login open={open} setOpen={setOpen} />
+    </>
   );
 }

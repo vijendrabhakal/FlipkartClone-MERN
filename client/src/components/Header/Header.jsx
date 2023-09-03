@@ -36,7 +36,7 @@ const Header = () => {
   return (
     <StyledHeader>
       <Toolbar style={{ minHeight: 55 }}>
-        <StyledBox>
+        <StyledBox style={{ cursor: "pointer" }}>
           <img
             style={{ width: 75 }}
             src="https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/flipkart-plus_8d85f4.png"

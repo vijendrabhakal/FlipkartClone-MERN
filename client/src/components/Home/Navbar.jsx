@@ -23,7 +23,7 @@ export default function Navbar() {
   return (
     <Component>
       {navData.map((element) => (
-        <Container>
+        <Container key={element.url}>
           <img src={element.url} alt="product" style={{ width: 64 }} />
           <Text>{element.text}</Text>
         </Container>
