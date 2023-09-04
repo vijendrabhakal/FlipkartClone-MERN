@@ -7,7 +7,7 @@ function App() {
   return (
     <DataProvider>
       <Header />
-      <Box>
+      <Box style={{ marginTop: 54 }}>
         <Home />
       </Box>
     </DataProvider>

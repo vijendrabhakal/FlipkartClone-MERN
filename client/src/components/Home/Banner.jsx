@@ -18,10 +18,14 @@ const responsive = {
   },
 };
 
-const Img = styled("img")`
-  width: 100%;
-  height: 280px;
-`;
+const Img = styled("img")(({ theme }) => ({
+  width: "100%",
+  height: 280,
+  [theme.breakpoints.down("sm")]: {
+    objectFit: "cover",
+    height: 180,
+  },
+}));
 
 export default function Banner() {
   return (
@@ -36,6 +40,7 @@ export default function Banner() {
         containerClass="carousel-container"
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item-padding-40-px"
+        keyBoardControl={true}
       >
         {bannerData.map((element) => (
           <Box key={element.id}>
