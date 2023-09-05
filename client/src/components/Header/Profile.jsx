@@ -1,48 +1,48 @@
-import { Box, Typography, Menu, MenuItem, styled } from "@mui/material";
-import { useState } from "react";
-import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
+import { useState } from 'react';
 
-const StyledMenu = styled(Menu)`
-  margin-top: 5px;
+import { Link } from 'react-router-dom';
+import { Typography, Menu, MenuItem, Box, styled } from '@mui/material';
+import { PowerSettingsNew } from '@mui/icons-material';
+
+const Component = styled(Menu)`
+    margin-top: 5px;
 `;
 
 const Logout = styled(Typography)`
-  font-size: 14px;
-  margin-left: 20px;
+    font-size: 14px;
+    margin-left: 20px;
 `;
 
-export default function Profile({ account, setAccount }) {
-  const [open, setOpen] = useState(false);
+const Profile = ({ account, setAccount }) => {
+    const [open, setOpen] = useState(false);
+    
+    const handleClick = (event) => {
+        setOpen(event.currentTarget);
+    };
 
-  const handleClick = (event) => {
-    setOpen(event.currentTarget);
-  };
+    const handleClose = () => {
+        setOpen(false);
+    };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleLogout = () => {
-    setAccount("");
-  };
-  return (
-    <>
-      <Box onClick={handleClick}>
-        <Typography style={{ marginTop: 3, cursor: "pointer" }}>
-          {account}
-        </Typography>
-        <StyledMenu anchorEl={open} open={Boolean(open)} onClose={handleClose}>
-          <MenuItem
-            onClick={() => {
-              handleClose();
-              handleLogout();
-            }}
-          >
-            <PowerSettingsNewIcon color="primary" fontSize="small" />
-            <Logout>Logout</Logout>
-          </MenuItem>
-        </StyledMenu>
-      </Box>
-    </>
-  );
+    const logout = () => {
+        setAccount('');
+    }
+    
+    return (
+        <>
+            <Box onClick={handleClick}><Typography style={{ marginTop: 2 }}>{account}</Typography></Box>
+            <Component
+                anchorEl={open}
+                open={Boolean(open)}
+                onClose={handleClose}
+            >
+                <MenuItem onClick={() => { handleClose(); logout();}}>
+                    <PowerSettingsNew fontSize='small' color='primary'/> 
+                    <Logout>Logout</Logout>
+                </MenuItem>
+            </Component>
+        </>
+    )    
 }
+
+export default Profile;

@@ -1,23 +1,18 @@
-import { products } from "./data.js";
-import Product from "./models/product.js";
+
+
+import Product from './model/productSchema.js';
+import { products } from './constants/product.js';
 
 const DefaultData = async () => {
-  try {
-    for (const productData of products) {
-      const product = new Product(productData);
-      const validationError = product.validateSync();
+    try {
+        await Product.deleteMany({});
+        await Product.insertMany(products);
 
-      if (validationError) {
-        console.log(`Validation failed for product: ${product.name}`);
-        console.log(validationError.errors);
-      } else {
-        await product.save();
-        console.log(`Data inserted successfully for product: ${product.name}`);
-      }
+        console.log('Data imported Successfully');
+        
+    } catch (error) {
+        console.log('Error: ', error.message);
     }
-  } catch (error) {
-    console.error("Error inserting data:", error.message);
-  }
-};
+}
 
 export default DefaultData;
