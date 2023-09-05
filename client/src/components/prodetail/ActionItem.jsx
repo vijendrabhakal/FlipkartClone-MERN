@@ -18,12 +18,18 @@ const Image = styled("img")({
   width: "95%",
 });
 
-const StyledButton = styled(Button)`
-  width: 46%;
-  border-radius: 2px;
-  height: 50px;
-  color: #fff;
-`;
+const StyledButton = styled(Button)(({ theme }) => ({
+  width: "48%",
+  height: "50px",
+  borderRadius: "2px",
+  [theme.breakpoints.down("lg")]: {
+    width: "44%",
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "48%",
+  },
+}));
+
 export default function ActionItem({ product }) {
   return (
     <LeftContainer>

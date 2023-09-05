@@ -1,65 +1,113 @@
-import React from "react";
-import { AppBar, Toolbar, Typography, Box } from "@mui/material";
-import styled from "@emotion/styled";
-import Search from "./Search";
-import CustomButtons from "./CustomButtons";
+import { useState } from "react";
+
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  Typography,
+  IconButton,
+  Drawer,
+  List,
+  styled,
+} from "@mui/material";
+import { Menu } from "@mui/icons-material";
 
 import { Link } from "react-router-dom";
+
+//components
+import CustomButtons from "./CustomButtons";
+import Search from "./Search";
 
 const StyledHeader = styled(AppBar)`
   background: #2874f0;
   height: 55px;
 `;
-const StyledBox = styled(Link)`
-  text-decoration: none;
+
+const Component = styled(Link)`
   margin-left: 12%;
   line-height: 0;
-  color: inherit;
+  color: #ffffff;
+  text-decoration: none;
 `;
-const ExplorePlus = styled(Typography)`
-  font-size: 11px;
+
+const SubHeading = styled(Typography)`
+  font-size: 10px;
   font-style: italic;
-  font-weight: 500;
 `;
 
-const Plus = styled(Box)`
-  color: #ffe500;
-`;
-const Img = styled("img")`
-  width: 11px;
-  height: 11px;
-  margin-left: 1px;
-`;
+const PlusImage = styled("img")({
+  width: 10,
+  height: 10,
+  marginLeft: 4,
+});
 
-const ButtonsContainer = styled(Box)`
-  margin: 0 5% 0 auto;
-  margin-left: 48px;
-`;
+const MenuButton = styled(IconButton)(({ theme }) => ({
+  display: "none",
+  [theme.breakpoints.down("sm")]: {
+    display: "block",
+  },
+}));
+
+const CustomButtonWrapper = styled("span")(({ theme }) => ({
+  margin: "0 5% 0 auto",
+  [theme.breakpoints.down("sm")]: {
+    display: "none",
+  },
+}));
 
 const Header = () => {
-  return (
-    <StyledHeader>
-      <Toolbar style={{ minHeight: 55 }}>
-        <StyledBox to="/">
-          <img
-            style={{ width: 75 }}
-            src="https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/flipkart-plus_8d85f4.png"
-            alt="logo"
-          />
-          <Box style={{ display: "flex" }}>
-            <ExplorePlus>
-              Explore <Plus component="span">Plus</Plus>
-            </ExplorePlus>
-            <Img
-              src="https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/plus_aef861.png"
-              alt="sublogo"
-            />
-          </Box>
-        </StyledBox>
-        <Search />
-        <ButtonsContainer>
+  const logoURL =
+    "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/flipkart-plus_8d85f4.png";
+  const subURL =
+    "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/plus_aef861.png";
+
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const list = () => (
+    <Box style={{ width: 250 }} onClick={handleClose}>
+      <List>
+        <listItem button>
           <CustomButtons />
-        </ButtonsContainer>
+        </listItem>
+      </List>
+    </Box>
+  );
+
+  return (
+    <StyledHeader position="fixed">
+      <Toolbar style={{ minHeight: 55 }}>
+        <MenuButton color="inherit" onClick={handleOpen}>
+          <Menu />
+        </MenuButton>
+
+        <Drawer open={open} onClose={handleClose}>
+          {list()}
+        </Drawer>
+
+        <Component to="/">
+          <img src={logoURL} style={{ width: 75 }} alt="img" />
+          <Box component="span" style={{ display: "flex" }}>
+            <SubHeading>
+              Explore&nbsp;
+              <Box component="span" style={{ color: "#FFE500" }}>
+                Plus
+              </Box>
+            </SubHeading>
+            <PlusImage src={subURL} />
+          </Box>
+        </Component>
+        <Search />
+        <CustomButtonWrapper>
+          <CustomButtons />
+        </CustomButtonWrapper>
       </Toolbar>
     </StyledHeader>
   );
