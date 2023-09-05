@@ -4,13 +4,17 @@ import styled from "@emotion/styled";
 import Search from "./Search";
 import CustomButtons from "./CustomButtons";
 
+import { Link } from "react-router-dom";
+
 const StyledHeader = styled(AppBar)`
   background: #2874f0;
   height: 55px;
 `;
-const StyledBox = styled(Box)`
+const StyledBox = styled(Link)`
+  text-decoration: none;
   margin-left: 12%;
   line-height: 0;
+  color: inherit;
 `;
 const ExplorePlus = styled(Typography)`
   font-size: 11px;
@@ -36,7 +40,7 @@ const Header = () => {
   return (
     <StyledHeader>
       <Toolbar style={{ minHeight: 55 }}>
-        <StyledBox style={{ cursor: "pointer" }}>
+        <StyledBox to="/">
           <img
             style={{ width: 75 }}
             src="https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/flipkart-plus_8d85f4.png"

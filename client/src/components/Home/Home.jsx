@@ -18,7 +18,6 @@ const Wrapper = styled(Box)`
 
 export default function Home() {
   let { products } = useSelector((state) => state.getProducts);
-  console.log(products);
 
   const dispatch = useDispatch();
 
